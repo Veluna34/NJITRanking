@@ -10,12 +10,12 @@
     --bg: #0a0a0a; --surface: #111; --card: #181818; --border: #2a2a2a;
     --accent: #e8ff3c; --accent2: #ff3c6e; --text: #f0f0f0; --muted: #666;
     --gold: #ffd700; --silver: #c0c0c0; --bronze: #cd7f32;
+    --green: #4ade80; --orange: #fb923c;
   }
   *{margin:0;padding:0;box-sizing:border-box;}
   body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh;overflow-x:hidden;}
   body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:999;}
 
-  /* HEADER */
   header{display:flex;align-items:center;justify-content:space-between;padding:20px 40px;border-bottom:1px solid var(--border);position:sticky;top:0;background:rgba(10,10,10,0.92);backdrop-filter:blur(20px);z-index:100;}
   .logo{font-family:'Bebas Neue',sans-serif;font-size:40px;letter-spacing:4px;color:var(--accent);text-shadow:0 0 30px rgba(232,255,60,0.4);}
   .logo span{color:var(--accent2);}
@@ -27,13 +27,20 @@
   .dot{width:7px;height:7px;border-radius:50%;background:var(--muted);transition:background 0.3s;}
   .dot.live{background:#4ade80;box-shadow:0 0 8px #4ade80;animation:blink 2s infinite;}
   @keyframes blink{0%,100%{opacity:1}50%{opacity:0.4}}
+  .auth-btn{background:transparent;border:1px solid var(--accent);color:var(--accent);padding:9px 22px;border-radius:100px;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;transition:all 0.2s;}
+  .auth-btn:hover{background:var(--accent);color:#000;}
+  .user-pill{display:flex;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--border);padding:6px 14px;border-radius:100px;font-size:13px;cursor:pointer;transition:all 0.2s;}
+  .user-pill:hover{border-color:var(--accent2);}
+  .user-pill .uname{font-weight:600;color:var(--text);}
+  .user-pill .ustatus{font-size:11px;padding:2px 8px;border-radius:100px;}
+  .ustatus.approved{background:rgba(74,222,128,0.15);color:var(--green);}
+  .ustatus.pending{background:rgba(251,146,60,0.15);color:var(--orange);}
+  .ustatus.denied{background:rgba(255,60,110,0.15);color:var(--accent2);}
 
-  /* VIEWS */
   .view{display:none;padding:48px 40px;max-width:1200px;margin:0 auto;}
   .view.active{display:block;animation:fadeIn 0.3s ease;}
   @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 
-  /* ADMIN */
   .page-title{font-family:'Bebas Neue',sans-serif;font-size:50px;letter-spacing:3px;line-height:1;}
   .page-sub{color:var(--muted);margin-top:8px;font-size:15px;margin-bottom:40px;}
   .upload-form{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:40px;margin-bottom:48px;position:relative;overflow:hidden;}
@@ -41,8 +48,9 @@
   .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:end;}
   .form-group{display:flex;flex-direction:column;gap:10px;}
   label{font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);}
-  input[type="text"]{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:13px 16px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:15px;outline:none;transition:border-color 0.2s;}
-  input[type="text"]:focus{border-color:var(--accent);}
+  input[type="text"],input[type="email"],input[type="password"],select{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:13px 16px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:15px;outline:none;transition:border-color 0.2s;width:100%;}
+  input:focus,select:focus{border-color:var(--accent);}
+  select option{background:var(--surface);}
   .file-drop{background:var(--surface);border:2px dashed var(--border);border-radius:12px;padding:28px;text-align:center;cursor:pointer;transition:all 0.2s;position:relative;overflow:hidden;}
   .file-drop:hover,.file-drop.over{border-color:var(--accent);background:rgba(232,255,60,0.04);}
   .file-drop input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;}
@@ -53,7 +61,7 @@
   .add-btn{background:var(--accent);color:#000;border:none;padding:14px;border-radius:12px;font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;cursor:pointer;width:100%;transition:all 0.2s;margin-top:20px;}
   .add-btn:hover{background:#fff;transform:translateY(-2px);box-shadow:0 8px 24px rgba(232,255,60,0.25);}
   .add-btn:disabled{opacity:0.4;cursor:not-allowed;transform:none;box-shadow:none;}
-  .section-label{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:3px;color:var(--muted);margin-bottom:18px;}
+  .section-label{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:3px;color:var(--muted);margin-bottom:18px;margin-top:40px;}
   .people-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px;}
   .person-card{background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;position:relative;transition:transform 0.2s;}
   .person-card:hover{transform:translateY(-3px);}
@@ -70,6 +78,28 @@
   .reset-btn{background:transparent;border:1px solid var(--accent2);color:var(--accent2);padding:9px 20px;border-radius:9px;cursor:pointer;font-size:13px;font-weight:600;transition:all 0.2s;white-space:nowrap;}
   .reset-btn:hover{background:var(--accent2);color:#fff;}
 
+  /* APPLICATIONS */
+  .applications-list{display:flex;flex-direction:column;gap:12px;}
+  .app-row{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px 22px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;}
+  .app-avatar{width:48px;height:48px;border-radius:10px;background:var(--surface);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;overflow:hidden;}
+  .app-avatar img{width:48px;height:48px;object-fit:cover;}
+  .app-info{flex:1;min-width:160px;}
+  .app-name{font-weight:600;font-size:15px;}
+  .app-email{color:var(--muted);font-size:12px;margin-top:2px;}
+  .app-meta{font-size:12px;color:var(--muted);margin-top:4px;}
+  .app-status{font-size:11px;padding:3px 10px;border-radius:100px;font-weight:600;flex-shrink:0;}
+  .app-status.pending{background:rgba(251,146,60,0.15);color:var(--orange);}
+  .app-status.approved{background:rgba(74,222,128,0.15);color:var(--green);}
+  .app-status.denied{background:rgba(255,60,110,0.15);color:var(--accent2);}
+  .app-actions{display:flex;gap:8px;flex-shrink:0;}
+  .approve-btn{background:rgba(74,222,128,0.15);border:1px solid var(--green);color:var(--green);padding:7px 16px;border-radius:8px;cursor:pointer;font-size:13px;font-weight:600;transition:all 0.2s;}
+  .approve-btn:hover{background:var(--green);color:#000;}
+  .deny-btn{background:rgba(255,60,110,0.1);border:1px solid var(--accent2);color:var(--accent2);padding:7px 16px;border-radius:8px;cursor:pointer;font-size:13px;font-weight:600;transition:all 0.2s;}
+  .deny-btn:hover{background:var(--accent2);color:#fff;}
+  .del-user-btn{background:transparent;border:1px solid var(--border);color:var(--muted);padding:7px 12px;border-radius:8px;cursor:pointer;font-size:13px;transition:all 0.2s;}
+  .del-user-btn:hover{border-color:var(--accent2);color:var(--accent2);}
+  .deny-reason-text{font-size:11px;color:var(--accent2);margin-top:4px;}
+
   /* VOTE */
   .vote-progress{background:var(--surface);border-radius:100px;height:3px;margin-bottom:40px;overflow:hidden;}
   .vote-bar{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:100px;transition:width 0.4s ease;}
@@ -84,10 +114,25 @@
   .vote-card:hover .voverlay{opacity:1;}
   .vote-card.chosen{border-color:var(--accent);animation:cpulse 0.45s ease;}
   .vote-card.unchosen{opacity:0.25;transform:scale(0.94);}
+  .vote-card.is-me{border-color:var(--accent2) !important;opacity:0.5;cursor:not-allowed;pointer-events:none;}
+  .vote-card.is-me::after{content:'YOU';position:absolute;top:12px;left:12px;background:var(--accent2);color:#fff;font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:2px;padding:4px 10px;border-radius:6px;}
   @keyframes cpulse{0%{transform:scale(1)}50%{transform:scale(1.05);box-shadow:0 0 40px rgba(232,255,60,0.5)}100%{transform:scale(1)}}
   .skip-btn{display:block;margin:0 auto 28px;background:transparent;border:1px solid var(--border);color:var(--muted);padding:9px 28px;border-radius:100px;cursor:pointer;font-size:13px;transition:all 0.2s;}
   .skip-btn:hover{border-color:var(--muted);color:var(--text);}
   .vcounter{text-align:center;color:var(--muted);font-size:13px;margin-bottom:28px;}
+
+  .vote-gate{text-align:center;padding:80px 40px;border:1px dashed var(--border);border-radius:20px;}
+  .vote-gate .gate-icon{font-size:56px;margin-bottom:20px;}
+  .vote-gate h2{font-family:'Bebas Neue',sans-serif;font-size:36px;letter-spacing:2px;margin-bottom:12px;}
+  .vote-gate p{color:var(--muted);font-size:15px;margin-bottom:28px;max-width:400px;margin-left:auto;margin-right:auto;}
+  .gate-btn{background:var(--accent);color:#000;border:none;padding:14px 32px;border-radius:12px;font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:2px;cursor:pointer;transition:all 0.2s;}
+  .gate-btn:hover{background:#fff;}
+  .status-banner{padding:20px 28px;border-radius:14px;margin-bottom:32px;display:flex;align-items:center;gap:14px;}
+  .status-banner.pending{background:rgba(251,146,60,0.1);border:1px solid rgba(251,146,60,0.3);}
+  .status-banner.denied{background:rgba(255,60,110,0.1);border:1px solid rgba(255,60,110,0.3);}
+  .status-banner .sbi{font-size:28px;}
+  .status-banner h3{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:1px;margin-bottom:4px;}
+  .status-banner p{color:var(--muted);font-size:14px;}
 
   /* LEADERBOARD */
   .podium{display:flex;justify-content:center;align-items:flex-end;gap:14px;margin-bottom:44px;flex-wrap:wrap;}
@@ -116,41 +161,59 @@
   .lb-score{font-family:'Bebas Neue',sans-serif;font-size:30px;color:var(--accent);letter-spacing:1px;text-align:right;flex-shrink:0;}
   .lb-score small{display:block;font-family:'DM Sans',sans-serif;font-size:10px;color:var(--muted);letter-spacing:0.5px;text-transform:uppercase;font-weight:600;}
 
-  /* TOAST */
   .toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--accent);color:#000;padding:12px 24px;border-radius:100px;font-weight:600;font-size:14px;z-index:1000;transition:transform 0.3s cubic-bezier(0.34,1.56,0.64,1);white-space:nowrap;}
   .toast.show{transform:translateX(-50%) translateY(0);}
 
   @media(max-width:680px){
-    header{padding:14px 18px;}
+    header{padding:14px 18px;flex-wrap:wrap;gap:10px;}
     .logo{font-size:30px;}
     .view{padding:28px 18px;}
     .form-grid{grid-template-columns:1fr;}
     .vote-card{width:200px;}
     .matchup{gap:14px;}
-    .status-pill span{display:none;}
   }
 
-  /* PASSWORD MODAL */
+  /* MODALS */
   .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.85);backdrop-filter:blur(8px);z-index:800;display:none;align-items:center;justify-content:center;}
   .modal-overlay.show{display:flex;}
-  .modal-box{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:40px;width:100%;max-width:400px;position:relative;overflow:hidden;}
+  .modal-box{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:40px;width:100%;max-width:480px;position:relative;overflow:hidden;max-height:90vh;overflow-y:auto;}
   .modal-box::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),var(--accent2));}
   .modal-title{font-family:'Bebas Neue',sans-serif;font-size:36px;letter-spacing:3px;margin-bottom:6px;}
   .modal-sub{color:var(--muted);font-size:14px;margin-bottom:28px;}
-  .modal-input{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px 18px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:16px;outline:none;transition:border-color 0.2s;width:100%;letter-spacing:2px;}
+  .modal-input{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px 18px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:16px;outline:none;transition:border-color 0.2s;width:100%;}
   .modal-input:focus{border-color:var(--accent);}
   .modal-input.shake{animation:shake 0.4s ease;}
   @keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-8px)}40%{transform:translateX(8px)}60%{transform:translateX(-6px)}80%{transform:translateX(6px)}}
   .modal-input.wrong{border-color:var(--accent2);}
   .modal-btn{background:var(--accent);color:#000;border:none;padding:14px;border-radius:12px;font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;cursor:pointer;width:100%;margin-top:16px;transition:all 0.2s;}
   .modal-btn:hover{background:#fff;}
+  .modal-btn.secondary{background:transparent;border:1px solid var(--border);color:var(--muted);font-size:15px;letter-spacing:1px;margin-top:10px;}
+  .modal-btn.secondary:hover{border-color:var(--accent);color:var(--accent);background:transparent;}
   .modal-err{color:var(--accent2);font-size:13px;text-align:center;margin-top:12px;min-height:18px;}
+  .modal-success{color:var(--green);font-size:13px;text-align:center;margin-top:12px;}
+  .form-field-modal{margin-bottom:16px;}
+  .form-field-modal label{display:block;font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:8px;}
+  .auth-tabs{display:flex;gap:4px;background:var(--surface);border-radius:10px;padding:4px;margin-bottom:28px;}
+  .auth-tab{flex:1;padding:10px;border:none;background:transparent;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;cursor:pointer;border-radius:8px;transition:all 0.2s;}
+  .auth-tab.active{background:var(--card);color:var(--text);}
+  .signup-section{display:none;}
+  .signup-section.active{display:block;}
+  .divider{text-align:center;color:var(--muted);font-size:12px;margin:16px 0;position:relative;}
+  .divider::before,.divider::after{content:'';position:absolute;top:50%;width:38%;height:1px;background:var(--border);}
+  .divider::before{left:0;} .divider::after{right:0;}
+  .deny-modal-box{max-width:400px;}
+  .admin-nav{display:flex;gap:4px;background:var(--surface);border-radius:10px;padding:4px;margin-bottom:32px;width:fit-content;}
+  .admin-tab{padding:9px 20px;border:none;background:transparent;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;border-radius:8px;transition:all 0.2s;}
+  .admin-tab.active{background:var(--card);color:var(--text);}
+  .admin-section{display:none;}
+  .admin-section.active{display:block;}
+  .badge{display:inline-flex;align-items:center;justify-content:center;background:var(--accent2);color:#fff;font-size:11px;font-weight:700;width:18px;height:18px;border-radius:50%;margin-left:6px;vertical-align:middle;}
 </style>
 </head>
 <body>
 
 <header>
-  <div class="logo">RANK<span>D</span></div>
+  <div class="logo">NJIT<span>Rank</span></div>
   <nav>
     <div class="status-pill">
       <div class="dot" id="conn-dot"></div>
@@ -159,6 +222,9 @@
     <button class="tab-btn active" onclick="switchTab('vote',this)">🗳 Vote</button>
     <button class="tab-btn" onclick="switchTab('leaderboard',this)">🏆 Rankings</button>
     <button class="tab-btn" onclick="switchTab('admin',this)">⚙️ Manage</button>
+    <div id="auth-area">
+      <button class="auth-btn" onclick="openAuthModal()">Sign In</button>
+    </div>
   </nav>
 </header>
 
@@ -166,15 +232,35 @@
 <div class="view active" id="view-vote">
   <div class="page-title">WHO WINS?</div>
   <div class="page-sub">Pick your favorite — every vote updates the rankings for everyone.</div>
-  <div class="vote-progress"><div class="vote-bar" id="vote-bar" style="width:0%"></div></div>
-  <div id="vote-empty" class="empty" style="display:none">
-    <div class="eicon">👥</div>
-    <p>Add at least 2 people in the <strong>Manage</strong> tab to start voting!</p>
+  <div id="vote-gate-login" class="vote-gate" style="display:none;">
+    <div class="gate-icon">🔒</div>
+    <h2>Sign In To Vote</h2>
+    <p>You need an approved @njit.edu account to cast votes.</p>
+    <button class="gate-btn" onclick="openAuthModal()">Sign In / Sign Up</button>
   </div>
-  <div id="vote-content">
-    <div class="vcounter" id="vcounter">0 votes cast</div>
-    <div class="matchup" id="matchup"></div>
-    <button class="skip-btn" onclick="nextMatchup()">Skip →</button>
+  <div id="vote-gate-pending" style="display:none;">
+    <div class="status-banner pending">
+      <div class="sbi">⏳</div>
+      <div><h3>Application Pending</h3><p>Your account is awaiting admin approval. Check back soon!</p></div>
+    </div>
+  </div>
+  <div id="vote-gate-denied" style="display:none;">
+    <div class="status-banner denied">
+      <div class="sbi">❌</div>
+      <div><h3>Application Denied</h3><p id="deny-reason-display">Your application was denied.</p></div>
+    </div>
+  </div>
+  <div id="vote-main" style="display:none;">
+    <div class="vote-progress"><div class="vote-bar" id="vote-bar" style="width:0%"></div></div>
+    <div id="vote-empty" class="empty" style="display:none">
+      <div class="eicon">👥</div>
+      <p>Add at least 2 people in the <strong>Manage</strong> tab to start voting!</p>
+    </div>
+    <div id="vote-content">
+      <div class="vcounter" id="vcounter">0 votes cast</div>
+      <div class="matchup" id="matchup"></div>
+      <button class="skip-btn" onclick="nextMatchup()">Skip →</button>
+    </div>
   </div>
 </div>
 
@@ -185,378 +271,103 @@
   <div id="podium" class="podium"></div>
   <div id="lb-list" class="lb-list"></div>
   <div id="lb-empty" class="empty" style="display:none">
-    <div class="eicon">📊</div>
-    <p>No votes yet — head to the Vote tab!</p>
+    <div class="eicon">📊</div><p>No votes yet — head to the Vote tab!</p>
   </div>
 </div>
 
 <!-- ADMIN -->
 <div class="view" id="view-admin">
-  <div class="page-title">MANAGE PEOPLE</div>
-  <div class="page-sub">Add or remove people from the ranking pool. Changes sync instantly for everyone.</div>
-
-  <div class="upload-form">
-    <div class="form-grid">
-      <div class="form-group">
-        <label>Full Name</label>
-        <input type="text" id="pname" placeholder="e.g. Alex Johnson" onkeydown="if(event.key==='Enter')addPerson()">
-      </div>
-      <div class="form-group">
-        <label>Photo (optional)</label>
-        <div class="file-drop" id="drop-zone">
-          <input type="file" id="photo-input" accept="image/*" onchange="handleFile(this.files[0])">
-          <img id="preview-img" src="" alt="">
-          <div class="drop-icon" id="drop-icon">📷</div>
-          <p><strong>Click to upload</strong> or drag & drop</p>
+  <div class="page-title">MANAGE</div>
+  <div class="page-sub">Manage people and review applications.</div>
+  <div class="admin-nav">
+    <button class="admin-tab active" onclick="switchAdminTab('people',this)">People</button>
+    <button class="admin-tab" onclick="switchAdminTab('applications',this)">Applications <span class="badge" id="pending-badge" style="display:none">0</span></button>
+  </div>
+  <div class="admin-section active" id="admin-people">
+    <div class="upload-form">
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Full Name</label>
+          <input type="text" id="pname" placeholder="e.g. Alex Johnson" onkeydown="if(event.key==='Enter')addPerson()">
+        </div>
+        <div class="form-group">
+          <label>Photo (optional)</label>
+          <div class="file-drop" id="drop-zone">
+            <input type="file" id="photo-input" accept="image/*" onchange="handleFile(this.files[0])">
+            <img id="preview-img" src="" alt="">
+            <div class="drop-icon" id="drop-icon">📷</div>
+            <p><strong>Click to upload</strong> or drag & drop</p>
+          </div>
         </div>
       </div>
+      <button class="add-btn" id="add-btn" onclick="addPerson()">+ ADD TO POOL</button>
     </div>
-    <button class="add-btn" id="add-btn" onclick="addPerson()">+ ADD TO POOL</button>
+    <div class="section-label" id="pool-label">POOL — 0 people</div>
+    <div id="admin-grid" class="people-grid"></div>
+    <div class="danger">
+      <div><strong>Reset All Votes</strong><p>Wipes all vote history. People stay in the pool.</p></div>
+      <button class="reset-btn" onclick="resetVotes()">Reset Votes</button>
+    </div>
   </div>
-
-  <div class="section-label" id="pool-label">POOL — 0 people</div>
-  <div id="admin-grid" class="people-grid"></div>
-
-  <div class="danger">
-    <div>
-      <strong>Reset All Votes</strong>
-      <p>Wipes all vote history. People stay in the pool.</p>
+  <div class="admin-section" id="admin-applications">
+    <div id="applications-list" class="applications-list"></div>
+    <div id="apps-empty" class="empty" style="display:none;">
+      <div class="eicon">📋</div><p>No applications yet.</p>
     </div>
-    <button class="reset-btn" onclick="resetVotes()">Reset Votes</button>
   </div>
 </div>
 
 <div class="toast" id="toast"></div>
 
-<script>
-// ── State ──────────────────────────────────────────────────────────────────
-let people = [];
-let leaderboard = [];
-let sessionVotes = 0;
-let currentPair = null;
-let selectedFile = null;
-
-// ── WebSocket ──────────────────────────────────────────────────────────────
-const WS_URL = `${location.protocol === 'https:' ? 'wss' : 'ws'}://${location.host}`;
-let ws, reconnectTimer;
-
-function connect() {
-  ws = new WebSocket(WS_URL);
-
-  ws.onopen = () => {
-    setStatus(true);
-    clearTimeout(reconnectTimer);
-  };
-
-  ws.onclose = () => {
-    setStatus(false);
-    reconnectTimer = setTimeout(connect, 3000);
-  };
-
-  ws.onerror = () => ws.close();
-
-  ws.onmessage = e => {
-    const { type, payload } = JSON.parse(e.data);
-    if (type === 'init') {
-      people = payload.people;
-      leaderboard = payload.leaderboard;
-      refreshAll();
-    } else if (type === 'person_added') {
-      if (!people.find(p => p.id === payload.id)) people.push(payload);
-      refreshAll();
-      showToast(`✅ ${payload.name} added`);
-    } else if (type === 'person_deleted') {
-      people = people.filter(p => p.id !== payload.id);
-      refreshAll();
-    } else if (type === 'leaderboard_update') {
-      leaderboard = payload;
-      renderLeaderboard();
-    } else if (type === 'vote_cast') {
-      // another user voted — just update leaderboard (already triggered)
-    } else if (type === 'votes_reset') {
-      leaderboard = leaderboard.map(p => ({ ...p, wins: 0, losses: 0, matchups: 0, winRate: 0 }));
-      renderLeaderboard();
-      showToast('🔄 Votes reset!');
-    }
-  };
-}
-
-function setStatus(live) {
-  const dot = document.getElementById('conn-dot');
-  const txt = document.getElementById('conn-text');
-  dot.className = 'dot' + (live ? ' live' : '');
-  txt.textContent = live ? 'Live' : 'Reconnecting…';
-}
-
-connect();
-
-// ── Tabs ───────────────────────────────────────────────────────────────────
-const ADMIN_PASSWORD = 'Adminchud';
-let adminUnlocked = false;
-let pendingAdminBtn = null;
-
-function switchTab(tab, btn) {
-  if (tab === 'admin' && !adminUnlocked) {
-    pendingAdminBtn = btn;
-    document.getElementById('pw-input').value = '';
-    document.getElementById('pw-err').textContent = '';
-    document.getElementById('pw-input').classList.remove('wrong','shake');
-    document.getElementById('pw-modal').classList.add('show');
-    setTimeout(() => document.getElementById('pw-input').focus(), 50);
-    return;
-  }
-  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-  document.getElementById('view-' + tab).classList.add('active');
-  btn.classList.add('active');
-  if (tab === 'leaderboard') renderLeaderboard();
-  if (tab === 'admin') renderAdmin();
-  if (tab === 'vote') renderVote();
-}
-
-function checkPassword() {
-  const val = document.getElementById('pw-input').value;
-  const inp = document.getElementById('pw-input');
-  const err = document.getElementById('pw-err');
-  if (val === ADMIN_PASSWORD) {
-    adminUnlocked = true;
-    document.getElementById('pw-modal').classList.remove('show');
-    if (pendingAdminBtn) switchTab('admin', pendingAdminBtn);
-    pendingAdminBtn = null;
-  } else {
-    inp.classList.add('wrong');
-    inp.classList.remove('shake');
-    void inp.offsetWidth; // force reflow
-    inp.classList.add('shake');
-    err.textContent = 'Wrong password. Try again.';
-    inp.value = '';
-    setTimeout(() => inp.focus(), 10);
-  }
-}
-
-// Close modal on overlay click
-document.addEventListener('DOMContentLoaded', () => {
-  document.getElementById('pw-modal').addEventListener('click', function(e) {
-    if (e.target === this) {
-      this.classList.remove('show');
-      pendingAdminBtn = null;
-    }
-  });
-});
-
-function refreshAll() {
-  const activeTab = document.querySelector('.view.active').id.replace('view-', '');
-  if (activeTab === 'vote') renderVote();
-  if (activeTab === 'leaderboard') renderLeaderboard();
-  if (activeTab === 'admin') renderAdmin();
-}
-
-// ── File Handling ──────────────────────────────────────────────────────────
-function handleFile(file) {
-  if (!file) return;
-  selectedFile = file;
-  const reader = new FileReader();
-  reader.onload = e => {
-    const img = document.getElementById('preview-img');
-    img.src = e.target.result;
-    img.style.display = 'block';
-    document.getElementById('drop-icon').style.display = 'none';
-  };
-  reader.readAsDataURL(file);
-}
-
-const dz = document.getElementById('drop-zone');
-dz.addEventListener('dragover', e => { e.preventDefault(); dz.classList.add('over'); });
-dz.addEventListener('dragleave', () => dz.classList.remove('over'));
-dz.addEventListener('drop', e => {
-  e.preventDefault(); dz.classList.remove('over');
-  const f = e.dataTransfer.files[0];
-  if (f && f.type.startsWith('image/')) handleFile(f);
-});
-
-// ── Add Person ─────────────────────────────────────────────────────────────
-async function addPerson() {
-  const name = document.getElementById('pname').value.trim();
-  if (!name) return showToast('Enter a name!');
-
-  const btn = document.getElementById('add-btn');
-  btn.disabled = true;
-  btn.textContent = 'ADDING…';
-
-  const fd = new FormData();
-  fd.append('name', name);
-  if (selectedFile) fd.append('image', selectedFile);
-
-  try {
-    const res = await fetch('/api/people', { method: 'POST', body: fd });
-    const data = await res.json();
-    if (!res.ok) {
-      showToast('ERROR: ' + (data.error || 'Unknown error'));
-      return;
-    }
-    document.getElementById('pname').value = '';
-    document.getElementById('preview-img').style.display = 'none';
-    document.getElementById('drop-icon').style.display = 'block';
-    document.getElementById('photo-input').value = '';
-    selectedFile = null;
-  } catch (e) {
-    showToast('Cannot reach server - is it running?');
-    console.error(e);
-  } finally {
-    btn.disabled = false;
-    btn.textContent = '+ ADD TO POOL';
-  }
-}
-
-// ── Delete Person ──────────────────────────────────────────────────────────
-async function deletePerson(id, name) {
-  if (!confirm(`Remove ${name}?`)) return;
-  try {
-    await fetch(`/api/people/${id}`, { method: 'DELETE' });
-    showToast(`🗑 ${name} removed`);
-  } catch {
-    showToast('❌ Failed to remove');
-  }
-}
-
-// ── Reset Votes ────────────────────────────────────────────────────────────
-async function resetVotes() {
-  if (!confirm('Reset all votes? This cannot be undone.')) return;
-  try {
-    await fetch('/api/reset-votes', { method: 'POST' });
-    sessionVotes = 0;
-  } catch {
-    showToast('❌ Failed to reset');
-  }
-}
-
-// ── Render Admin ───────────────────────────────────────────────────────────
-function renderAdmin() {
-  document.getElementById('pool-label').textContent = `POOL — ${people.length} people`;
-  const grid = document.getElementById('admin-grid');
-  if (!people.length) {
-    grid.innerHTML = `<div class="empty" style="grid-column:1/-1"><div class="eicon">👥</div><p>No one added yet!</p></div>`;
-    return;
-  }
-  grid.innerHTML = people.map(p => `
-    <div class="person-card">
-      ${p.image ? `<img src="${p.image}" alt="${p.name}">` : `<div class="no-img">🧑</div>`}
-      <div class="cname">${p.name}</div>
-      <button class="del-btn" onclick="deletePerson('${p.id}','${p.name.replace(/'/g,"\\'")}')">✕</button>
+<!-- AUTH MODAL -->
+<div class="modal-overlay" id="auth-modal">
+  <div class="modal-box">
+    <div class="auth-tabs">
+      <button class="auth-tab active" onclick="switchAuthTab('login')">Sign In</button>
+      <button class="auth-tab" onclick="switchAuthTab('signup')">Sign Up</button>
     </div>
-  `).join('');
-}
-
-// ── Render Vote ────────────────────────────────────────────────────────────
-function renderVote() {
-  const empty = document.getElementById('vote-empty');
-  const content = document.getElementById('vote-content');
-  if (people.length < 2) {
-    empty.style.display = 'block'; content.style.display = 'none'; return;
-  }
-  empty.style.display = 'none'; content.style.display = 'block';
-  nextMatchup();
-}
-
-function nextMatchup() {
-  if (people.length < 2) return;
-  const pool = [...people].sort(() => Math.random() - 0.5);
-  currentPair = [pool[0], pool[1]];
-
-  document.getElementById('vcounter').textContent = `${sessionVotes} vote${sessionVotes !== 1 ? 's' : ''} cast this session`;
-  document.getElementById('vote-bar').style.width = Math.min(sessionVotes * 5, 100) + '%';
-
-  const [a, b] = currentPair;
-  document.getElementById('matchup').innerHTML = `
-    <div class="vote-card" id="card-a" onclick="castVote('${a.id}','${b.id}','card-a','card-b')">
-      ${a.image ? `<img src="${a.image}" alt="${a.name}">` : `<div class="vno-img">🧑</div>`}
-      <div class="vname">${a.name}</div>
-      <div class="voverlay">👑</div>
+    <div class="signup-section active" id="auth-login">
+      <div class="modal-title">WELCOME BACK</div>
+      <div class="modal-sub">Sign in with your @njit.edu account.</div>
+      <div class="form-field-modal"><label>Email</label><input class="modal-input" id="login-email" type="email" placeholder="you@njit.edu"></div>
+      <div class="form-field-modal"><label>Password</label><input class="modal-input" id="login-password" type="password" placeholder="Password" onkeydown="if(event.key==='Enter')doLogin()"></div>
+      <button class="modal-btn" onclick="doLogin()">SIGN IN</button>
+      <div class="modal-err" id="login-err"></div>
     </div>
-    <div class="vs">VS</div>
-    <div class="vote-card" id="card-b" onclick="castVote('${b.id}','${a.id}','card-b','card-a')">
-      ${b.image ? `<img src="${b.image}" alt="${b.name}">` : `<div class="vno-img">🧑</div>`}
-      <div class="vname">${b.name}</div>
-      <div class="voverlay">👑</div>
-    </div>
-  `;
-}
-
-async function castVote(winnerId, loserId, winCard, loseCard) {
-  document.getElementById(winCard).classList.add('chosen');
-  document.getElementById(loseCard).classList.add('unchosen');
-  sessionVotes++;
-
-  try {
-    await fetch('/api/vote', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ winnerId, loserId })
-    });
-  } catch { showToast('❌ Vote failed'); }
-
-  setTimeout(nextMatchup, 550);
-}
-
-// ── Render Leaderboard ─────────────────────────────────────────────────────
-function renderLeaderboard() {
-  const podiumEl = document.getElementById('podium');
-  const listEl = document.getElementById('lb-list');
-  const emptyEl = document.getElementById('lb-empty');
-
-  const hasVotes = leaderboard.some(p => p.matchups > 0);
-
-  if (!leaderboard.length || !hasVotes) {
-    podiumEl.innerHTML = ''; listEl.innerHTML = '';
-    emptyEl.style.display = 'block'; return;
-  }
-  emptyEl.style.display = 'none';
-
-  // Update sub
-  const total = leaderboard.reduce((s, p) => s + (p.matchups || 0), 0) / 2;
-  document.getElementById('lb-sub').textContent = `${Math.round(total)} total votes cast · updates live`;
-
-  // Podium
-  const top = leaderboard.slice(0, Math.min(3, leaderboard.length));
-  const order = top.length >= 3 ? [top[1], top[0], top[2]] : top.length === 2 ? [null, top[0], top[1]] : [null, top[0], null];
-  const medals = ['🥈','🥇','🥉'];
-
-  podiumEl.innerHTML = order.map((p, i) => {
-    if (!p) return '<div class="ps" style="width:96px"></div>';
-    return `<div class="ps">
-      <div class="pmedal">${medals[i]}</div>
-      ${p.image ? `<img src="${p.image}" style="width:${[95,125,85][i]}px;height:${[95,125,85][i]}px" alt="">` : `<div class="pno" style="width:${[95,125,85][i]}px;height:${[95,125,85][i]}px">🧑</div>`}
-      <div class="pname">${p.name}</div>
-      <div class="pbar">${p.winRate}%</div>
-    </div>`;
-  }).join('');
-
-  // List
-  const maxRate = leaderboard[0]?.winRate || 1;
-  listEl.innerHTML = leaderboard.map((p, i) => `
-    <div class="lb-row">
-      <div class="lb-rank">${i + 1}</div>
-      ${p.image ? `<img class="lb-img" src="${p.image}" alt="${p.name}">` : `<div class="lb-nimg">🧑</div>`}
-      <div class="lb-info">
-        <div class="lb-name">${p.name}</div>
-        <div class="lb-stat">${p.wins}W / ${p.losses}L · ${p.matchups} matchups</div>
-        <div class="sbar-wrap"><div class="sbar" style="width:${maxRate > 0 ? Math.round((p.winRate/maxRate)*100) : 0}%"></div></div>
+    <div class="signup-section" id="auth-signup">
+      <div class="modal-title">JOIN NJITRank</div>
+      <div class="modal-sub">Must use your @njit.edu email. Your account will be reviewed before you can vote.</div>
+      <div class="form-field-modal"><label>NJIT Email</label><input class="modal-input" id="signup-email" type="email" placeholder="you@njit.edu"></div>
+      <div class="form-field-modal"><label>Password</label><input class="modal-input" id="signup-password" type="password" placeholder="At least 6 characters"></div>
+      <div class="divider">I am...</div>
+      <div class="form-field-modal">
+        <label>Select yourself from the pool (if already listed)</label>
+        <select class="modal-input" id="signup-person" onchange="handlePersonSelect()">
+          <option value="">— I'm not in the pool yet —</option>
+        </select>
       </div>
-      <div class="lb-score">${p.winRate}%<small>win rate</small></div>
+      <div id="signup-new-person">
+        <div class="divider">Or create your profile</div>
+        <div class="form-field-modal"><label>Display Name</label><input class="modal-input" id="signup-username" type="text" placeholder="How you'll appear in rankings"></div>
+        <div class="form-field-modal">
+          <label>Your Photo (required if not selecting above)</label>
+          <div class="file-drop" id="signup-drop-zone">
+            <input type="file" id="signup-photo" accept="image/*" onchange="handleSignupFile(this.files[0])">
+            <img id="signup-preview" src="" alt="" style="display:none;width:72px;height:72px;border-radius:10px;object-fit:cover;border:2px solid var(--accent);margin:0 auto 8px;">
+            <div class="drop-icon" id="signup-drop-icon">📷</div>
+            <p><strong>Click to upload</strong> or drag & drop</p>
+          </div>
+        </div>
+      </div>
+      <button class="modal-btn" onclick="doSignup()">CREATE ACCOUNT</button>
+      <div class="modal-err" id="signup-err"></div>
+      <div class="modal-success" id="signup-success"></div>
     </div>
-  `).join('');
-}
+    <button class="modal-btn secondary" onclick="closeAuthModal()">Close</button>
+  </div>
+</div>
 
-// ── Toast ──────────────────────────────────────────────────────────────────
-function showToast(msg) {
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 2500);
-}
-</script>
-
-<!-- PASSWORD MODAL -->
+<!-- ADMIN PASSWORD MODAL -->
 <div class="modal-overlay" id="pw-modal">
   <div class="modal-box">
     <div class="modal-title">ADMIN ACCESS</div>
@@ -566,5 +377,472 @@ function showToast(msg) {
     <div class="modal-err" id="pw-err"></div>
   </div>
 </div>
+
+<!-- DENY MODAL -->
+<div class="modal-overlay" id="deny-modal">
+  <div class="modal-box deny-modal-box">
+    <div class="modal-title">DENY APPLICATION</div>
+    <div class="modal-sub" id="deny-modal-sub">Provide a reason for denial.</div>
+    <div class="form-field-modal"><label>Reason</label><input class="modal-input" id="deny-reason-input" type="text" placeholder="e.g. Not an NJIT student" onkeydown="if(event.key==='Enter')submitDeny()"></div>
+    <button class="modal-btn" onclick="submitDeny()">DENY</button>
+    <button class="modal-btn secondary" onclick="closeDenyModal()">Cancel</button>
+    <div class="modal-err" id="deny-err"></div>
+  </div>
+</div>
+
+<script>
+let people = [], leaderboard = [], sessionVotes = 0, currentPair = null;
+let selectedFile = null, signupFile = null, currentUser = null;
+let denyTargetId = null, allUsers = [];
+
+function getToken(){ return localStorage.getItem('rankd_token'); }
+function setToken(t){ localStorage.setItem('rankd_token', t); }
+function clearToken(){ localStorage.removeItem('rankd_token'); }
+
+async function loadMe(){
+  const token = getToken();
+  if(!token){ currentUser=null; updateAuthUI(); return; }
+  try{
+    const res = await fetch('/api/me',{headers:{'x-session-token':token}});
+    if(!res.ok){ clearToken(); currentUser=null; }
+    else currentUser = await res.json();
+  }catch{ currentUser=null; }
+  updateAuthUI();
+}
+
+function updateAuthUI(){
+  const area = document.getElementById('auth-area');
+  if(!currentUser){
+    area.innerHTML = `<button class="auth-btn" onclick="openAuthModal()">Sign In</button>`;
+  } else {
+    const labels = {approved:'✓ Approved',pending:'⏳ Pending',denied:'✗ Denied'};
+    area.innerHTML = `<div class="user-pill" onclick="handleUserPillClick()">
+      <span class="uname">${currentUser.username||currentUser.email.split('@')[0]}</span>
+      <span class="ustatus ${currentUser.status}">${labels[currentUser.status]||currentUser.status}</span>
+    </div>`;
+  }
+  renderVoteArea();
+}
+
+function handleUserPillClick(){ if(confirm('Sign out?')) doLogout(); }
+
+async function doLogout(){
+  const token = getToken();
+  if(token) await fetch('/api/logout',{method:'POST',headers:{'x-session-token':token}});
+  clearToken(); currentUser=null; updateAuthUI(); showToast('Signed out');
+}
+
+// WebSocket
+const WS_URL = `${location.protocol==='https:'?'wss':'ws'}://${location.host}`;
+let ws, reconnectTimer;
+function connect(){
+  ws = new WebSocket(WS_URL);
+  ws.onopen = ()=>{ setStatus(true); clearTimeout(reconnectTimer); };
+  ws.onclose = ()=>{ setStatus(false); reconnectTimer=setTimeout(connect,3000); };
+  ws.onerror = ()=>ws.close();
+  ws.onmessage = e=>{
+    const {type,payload} = JSON.parse(e.data);
+    if(type==='init'){ people=payload.people; leaderboard=payload.leaderboard; refreshAll(); }
+    else if(type==='person_added'){ if(!people.find(p=>p.id===payload.id)) people.push(payload); refreshAll(); populateSignupDropdown(); }
+    else if(type==='person_deleted'){ people=people.filter(p=>p.id!==payload.id); refreshAll(); populateSignupDropdown(); }
+    else if(type==='leaderboard_update'){ leaderboard=payload; renderLeaderboard(); }
+    else if(type==='votes_reset'){ leaderboard=leaderboard.map(p=>({...p,wins:0,losses:0,matchups:0,winRate:0})); renderLeaderboard(); showToast('🔄 Votes reset!'); }
+    else if(type==='new_application'){ showToast('📋 New application!'); if(adminUnlocked) loadApplications(); }
+    else if(type==='application_updated'){
+      if(currentUser&&currentUser.id===payload.id){ currentUser.status=payload.status; currentUser.deny_reason=payload.deny_reason; updateAuthUI(); }
+      if(adminUnlocked) loadApplications();
+    }
+  };
+}
+function setStatus(live){
+  document.getElementById('conn-dot').className='dot'+(live?' live':'');
+  document.getElementById('conn-text').textContent=live?'Live':'Reconnecting…';
+}
+connect();
+
+// Tabs
+const ADMIN_PASSWORD='Adminchud';
+let adminUnlocked=false, pendingAdminBtn=null;
+
+function switchTab(tab,btn){
+  if(tab==='admin'&&!adminUnlocked){
+    pendingAdminBtn=btn;
+    document.getElementById('pw-input').value='';
+    document.getElementById('pw-err').textContent='';
+    document.getElementById('pw-modal').classList.add('show');
+    setTimeout(()=>document.getElementById('pw-input').focus(),50);
+    return;
+  }
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('view-'+tab).classList.add('active');
+  btn.classList.add('active');
+  if(tab==='leaderboard') renderLeaderboard();
+  if(tab==='admin'){ renderAdmin(); loadApplications(); }
+  if(tab==='vote') renderVoteArea();
+}
+
+function switchAdminTab(tab,btn){
+  document.querySelectorAll('.admin-section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.admin-tab').forEach(b=>b.classList.remove('active'));
+  document.getElementById('admin-'+tab).classList.add('active');
+  btn.classList.add('active');
+  if(tab==='applications') loadApplications();
+}
+
+function checkPassword(){
+  const val=document.getElementById('pw-input').value;
+  const inp=document.getElementById('pw-input');
+  if(val===ADMIN_PASSWORD){
+    adminUnlocked=true;
+    document.getElementById('pw-modal').classList.remove('show');
+    if(pendingAdminBtn) switchTab('admin',pendingAdminBtn);
+    pendingAdminBtn=null;
+  } else {
+    inp.classList.add('wrong'); inp.classList.remove('shake');
+    void inp.offsetWidth; inp.classList.add('shake');
+    document.getElementById('pw-err').textContent='Wrong password.';
+    inp.value=''; setTimeout(()=>inp.focus(),10);
+  }
+}
+
+function refreshAll(){
+  const t=document.querySelector('.view.active')?.id?.replace('view-','');
+  if(t==='vote') renderVoteArea();
+  if(t==='leaderboard') renderLeaderboard();
+  if(t==='admin') renderAdmin();
+}
+
+// Auth Modal
+function openAuthModal(){ document.getElementById('auth-modal').classList.add('show'); populateSignupDropdown(); }
+function closeAuthModal(){
+  document.getElementById('auth-modal').classList.remove('show');
+  document.getElementById('login-err').textContent='';
+  document.getElementById('signup-err').textContent='';
+  document.getElementById('signup-success').textContent='';
+}
+
+function switchAuthTab(tab){
+  document.querySelectorAll('.auth-tab').forEach((t,i)=>t.classList.toggle('active',(i===0)===(tab==='login')));
+  document.getElementById('auth-login').classList.toggle('active',tab==='login');
+  document.getElementById('auth-signup').classList.toggle('active',tab==='signup');
+}
+
+function populateSignupDropdown(){
+  const sel=document.getElementById('signup-person');
+  if(!sel) return;
+  const cur=sel.value;
+  sel.innerHTML='<option value="">— I\'m not in the pool yet —</option>';
+  people.forEach(p=>{ const o=document.createElement('option'); o.value=p.id; o.textContent=p.name; sel.appendChild(o); });
+  sel.value=cur;
+  handlePersonSelect();
+}
+
+function handlePersonSelect(){
+  const val=document.getElementById('signup-person').value;
+  document.getElementById('signup-new-person').style.display=val?'none':'block';
+}
+
+function handleSignupFile(file){
+  if(!file) return;
+  signupFile=file;
+  const reader=new FileReader();
+  reader.onload=e=>{ const p=document.getElementById('signup-preview'); p.src=e.target.result; p.style.display='block'; document.getElementById('signup-drop-icon').style.display='none'; };
+  reader.readAsDataURL(file);
+}
+
+async function doLogin(){
+  const email=document.getElementById('login-email').value.trim();
+  const password=document.getElementById('login-password').value;
+  const err=document.getElementById('login-err');
+  err.textContent='';
+  if(!email||!password){ err.textContent='Fill in all fields.'; return; }
+  try{
+    const res=await fetch('/api/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email,password})});
+    const data=await res.json();
+    if(!res.ok){ err.textContent=data.error; return; }
+    setToken(data.token);
+    currentUser={id:data.id,email:data.email,username:data.username,status:data.status,deny_reason:data.deny_reason,person_id:data.person_id};
+    updateAuthUI(); closeAuthModal(); showToast('✅ Signed in!');
+  }catch{ err.textContent='Server error.'; }
+}
+
+async function doSignup(){
+  const email=document.getElementById('signup-email').value.trim();
+  const password=document.getElementById('signup-password').value;
+  const personId=document.getElementById('signup-person').value;
+  const username=document.getElementById('signup-username').value.trim();
+  const err=document.getElementById('signup-err');
+  const success=document.getElementById('signup-success');
+  err.textContent=''; success.textContent='';
+  if(!email||!password){ err.textContent='Email and password required.'; return; }
+  if(!email.endsWith('@njit.edu')){ err.textContent='Must use an @njit.edu email.'; return; }
+  if(!personId&&!signupFile){ err.textContent='Please select yourself or upload a photo.'; return; }
+  if(!personId&&!username){ err.textContent='Please enter a display name.'; return; }
+  const fd=new FormData();
+  fd.append('email',email); fd.append('password',password);
+  if(personId) fd.append('person_id',personId);
+  if(username) fd.append('username',username);
+  if(signupFile) fd.append('photo',signupFile);
+  try{
+    const res=await fetch('/api/signup',{method:'POST',body:fd});
+    const data=await res.json();
+    if(!res.ok){ err.textContent=data.error; return; }
+    success.textContent='✅ Account created! Awaiting admin approval.';
+    document.getElementById('signup-email').value='';
+    document.getElementById('signup-password').value='';
+    document.getElementById('signup-username').value='';
+    signupFile=null;
+  }catch{ err.textContent='Server error.'; }
+}
+
+// Vote area
+function renderVoteArea(){
+  const gL=document.getElementById('vote-gate-login');
+  const gP=document.getElementById('vote-gate-pending');
+  const gD=document.getElementById('vote-gate-denied');
+  const vM=document.getElementById('vote-main');
+  gL.style.display='none'; gP.style.display='none'; gD.style.display='none'; vM.style.display='none';
+  if(!currentUser){ gL.style.display='block'; return; }
+  if(currentUser.status==='pending'){ gP.style.display='block'; return; }
+  if(currentUser.status==='denied'){
+    document.getElementById('deny-reason-display').textContent=currentUser.deny_reason?`Reason: ${currentUser.deny_reason}`:'Your application was denied.';
+    gD.style.display='block'; return;
+  }
+  vM.style.display='block'; renderVote();
+}
+
+function renderVote(){
+  const empty=document.getElementById('vote-empty');
+  const content=document.getElementById('vote-content');
+  if(people.length<2){ empty.style.display='block'; content.style.display='none'; return; }
+  empty.style.display='none'; content.style.display='block';
+  nextMatchup();
+}
+
+function nextMatchup(){
+  // Filter out the current user's own person from the pool
+  const myId = currentUser?.person_id;
+  const pool = [...people].filter(p => p.id !== myId).sort(() => Math.random() - 0.5);
+  
+  if(pool.length < 2){
+    document.getElementById('vote-empty').style.display = 'block';
+    document.getElementById('vote-content').querySelector('.matchup').innerHTML = '';
+    document.getElementById('vote-content').querySelector('.skip-btn').style.display = 'none';
+    document.getElementById('vote-empty').querySelector('p').textContent = 'Not enough other people to vote on yet!';
+    return;
+  }
+
+  currentPair = [pool[0], pool[1]];
+  document.getElementById('vcounter').textContent = `${sessionVotes} vote${sessionVotes !== 1 ? 's' : ''} cast this session`;
+  document.getElementById('vote-bar').style.width = Math.min(sessionVotes * 5, 100) + '%';
+
+  const [a, b] = currentPair;
+  document.getElementById('matchup').innerHTML = `
+    <div class="vote-card" id="card-a" onclick="castVote('${a.id}','${b.id}','card-a','card-b')">
+      ${a.image ? `<img src="${a.image}" alt="${a.name}">` : `<div class="vno-img">🧑</div>`}
+      <div class="vname">${a.name}</div><div class="voverlay">👑</div>
+    </div>
+    <div class="vs">VS</div>
+    <div class="vote-card" id="card-b" onclick="castVote('${b.id}','${a.id}','card-b','card-a')">
+      ${b.image ? `<img src="${b.image}" alt="${b.name}">` : `<div class="vno-img">🧑</div>`}
+      <div class="vname">${b.name}</div><div class="voverlay">👑</div>
+    </div>`;
+}
+
+async function castVote(winnerId,loserId,winCard,loseCard){
+  const wEl = document.getElementById(winCard);
+  const lEl = document.getElementById(loseCard);
+  wEl?.classList.add('chosen');
+  lEl?.classList.add('unchosen');
+  sessionVotes++;
+  try{
+    const res=await fetch('/api/vote',{method:'POST',headers:{'Content-Type':'application/json','x-session-token':getToken()},body:JSON.stringify({winnerId,loserId})});
+    if(!res.ok){ const d=await res.json(); showToast('❌ '+d.error); }
+  }catch{ showToast('❌ Vote failed'); }
+  setTimeout(nextMatchup,550);
+}
+
+// Admin people
+function handleFile(file){
+  if(!file) return;
+  selectedFile=file;
+  const reader=new FileReader();
+  reader.onload=e=>{ const img=document.getElementById('preview-img'); img.src=e.target.result; img.style.display='block'; document.getElementById('drop-icon').style.display='none'; };
+  reader.readAsDataURL(file);
+}
+const dz=document.getElementById('drop-zone');
+dz.addEventListener('dragover',e=>{e.preventDefault();dz.classList.add('over');});
+dz.addEventListener('dragleave',()=>dz.classList.remove('over'));
+dz.addEventListener('drop',e=>{e.preventDefault();dz.classList.remove('over');const f=e.dataTransfer.files[0];if(f&&f.type.startsWith('image/'))handleFile(f);});
+
+async function addPerson(){
+  const name=document.getElementById('pname').value.trim();
+  if(!name) return showToast('Enter a name!');
+  const btn=document.getElementById('add-btn');
+  btn.disabled=true; btn.textContent='ADDING…';
+  const fd=new FormData();
+  fd.append('name',name);
+  if(selectedFile) fd.append('image',selectedFile);
+  try{
+    const res=await fetch('/api/people',{method:'POST',body:fd});
+    const data=await res.json();
+    if(!res.ok){ showToast('ERROR: '+(data.error||'Unknown')); return; }
+    document.getElementById('pname').value='';
+    document.getElementById('preview-img').style.display='none';
+    document.getElementById('drop-icon').style.display='block';
+    document.getElementById('photo-input').value='';
+    selectedFile=null;
+    showToast('✅ '+data.name+' added');
+  }catch{ showToast('Cannot reach server'); }
+  finally{ btn.disabled=false; btn.textContent='+ ADD TO POOL'; }
+}
+
+async function deletePerson(id,name){
+  if(!confirm(`Remove ${name}?`)) return;
+  try{ await fetch(`/api/people/${id}`,{method:'DELETE'}); showToast(`🗑 ${name} removed`); }
+  catch{ showToast('❌ Failed'); }
+}
+
+async function resetVotes(){
+  if(!confirm('Reset all votes?')) return;
+  try{ await fetch('/api/reset-votes',{method:'POST'}); sessionVotes=0; }
+  catch{ showToast('❌ Failed'); }
+}
+
+function renderAdmin(){
+  document.getElementById('pool-label').textContent=`POOL — ${people.length} people`;
+  const grid=document.getElementById('admin-grid');
+  if(!people.length){ grid.innerHTML=`<div class="empty" style="grid-column:1/-1"><div class="eicon">👥</div><p>No one added yet!</p></div>`; return; }
+  grid.innerHTML=people.map(p=>`
+    <div class="person-card">
+      ${p.image?`<img src="${p.image}" alt="${p.name}">`:`<div class="no-img">🧑</div>`}
+      <div class="cname">${p.name}</div>
+      <button class="del-btn" onclick="deletePerson('${p.id}','${p.name.replace(/'/g,"\\'")}')">✕</button>
+    </div>`).join('');
+}
+
+// Applications
+async function loadApplications(){
+  try{
+    const res=await fetch('/api/users');
+    allUsers=await res.json();
+    const pending=allUsers.filter(u=>u.status==='pending');
+    const badge=document.getElementById('pending-badge');
+    badge.style.display=pending.length?'inline-flex':'none';
+    badge.textContent=pending.length;
+    renderApplications();
+  }catch{ showToast('❌ Failed to load applications'); }
+}
+
+function renderApplications(){
+  const list=document.getElementById('applications-list');
+  const empty=document.getElementById('apps-empty');
+  if(!allUsers.length){ list.innerHTML=''; empty.style.display='block'; return; }
+  empty.style.display='none';
+  const sorted=[...allUsers].sort((a,b)=>{
+    const o={pending:0,denied:1,approved:2};
+    return (o[a.status]??3)-(o[b.status]??3)||b.created_at-a.created_at;
+  });
+  const findPerson=id=>people.find(p=>p.id===id);
+  list.innerHTML=sorted.map(u=>{
+    const linked=u.person_id?findPerson(u.person_id):null;
+    return `<div class="app-row">
+      <div class="app-avatar">${u.photo?`<img src="${u.photo}" alt="">`:(linked?.image?`<img src="${linked.image}" alt="">`:'🧑')}</div>
+      <div class="app-info">
+        <div class="app-name">${u.username||'—'}</div>
+        <div class="app-email">${u.email}</div>
+        <div class="app-meta">${linked?`Linked to: ${linked.name}`:'New person'}</div>
+        ${u.deny_reason?`<div class="deny-reason-text">Denied: ${u.deny_reason}</div>`:''}
+      </div>
+      <span class="app-status ${u.status}">${u.status}</span>
+      <div class="app-actions">
+        ${u.status!=='approved'?`<button class="approve-btn" onclick="approveUser('${u.id}')">Approve</button>`:''}
+        ${u.status!=='denied'?`<button class="deny-btn" onclick="openDenyModal('${u.id}','${(u.username||u.email).replace(/'/g,"\\'")}')">Deny</button>`:''}
+        <button class="del-user-btn" onclick="deleteUser('${u.id}')">✕</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+async function approveUser(id){
+  try{ await fetch(`/api/users/${id}/approve`,{method:'POST'}); showToast('✅ User approved'); await loadApplications(); }
+  catch{ showToast('❌ Failed'); }
+}
+
+function openDenyModal(id,name){
+  denyTargetId=id;
+  document.getElementById('deny-modal-sub').textContent=`Provide a reason for denying ${name}.`;
+  document.getElementById('deny-reason-input').value='';
+  document.getElementById('deny-err').textContent='';
+  document.getElementById('deny-modal').classList.add('show');
+  setTimeout(()=>document.getElementById('deny-reason-input').focus(),50);
+}
+function closeDenyModal(){ document.getElementById('deny-modal').classList.remove('show'); denyTargetId=null; }
+
+async function submitDeny(){
+  const reason=document.getElementById('deny-reason-input').value.trim();
+  if(!reason){ document.getElementById('deny-err').textContent='Reason required.'; return; }
+  try{
+    const res=await fetch(`/api/users/${denyTargetId}/deny`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({reason})});
+    if(!res.ok){ document.getElementById('deny-err').textContent='Failed.'; return; }
+    closeDenyModal(); showToast('User denied'); await loadApplications();
+  }catch{ document.getElementById('deny-err').textContent='Server error.'; }
+}
+
+async function deleteUser(id){
+  if(!confirm('Remove this user entirely?')) return;
+  try{ await fetch(`/api/users/${id}`,{method:'DELETE'}); showToast('🗑 User removed'); await loadApplications(); }
+  catch{ showToast('❌ Failed'); }
+}
+
+// Leaderboard
+function renderLeaderboard(){
+  const podiumEl=document.getElementById('podium');
+  const listEl=document.getElementById('lb-list');
+  const emptyEl=document.getElementById('lb-empty');
+  const hasVotes=leaderboard.some(p=>p.matchups>0);
+  if(!leaderboard.length||!hasVotes){ podiumEl.innerHTML=''; listEl.innerHTML=''; emptyEl.style.display='block'; return; }
+  emptyEl.style.display='none';
+  const total=leaderboard.reduce((s,p)=>s+(p.matchups||0),0)/2;
+  document.getElementById('lb-sub').textContent=`${Math.round(total)} total votes cast · updates live`;
+  const top=leaderboard.slice(0,Math.min(3,leaderboard.length));
+  const order=top.length>=3?[top[1],top[0],top[2]]:top.length===2?[null,top[0],top[1]]:[null,top[0],null];
+  const medals=['🥈','🥇','🥉'];
+  podiumEl.innerHTML=order.map((p,i)=>{
+    if(!p) return '<div class="ps" style="width:96px"></div>';
+    return `<div class="ps"><div class="pmedal">${medals[i]}</div>
+      ${p.image?`<img src="${p.image}" style="width:${[95,125,85][i]}px;height:${[95,125,85][i]}px" alt="">`:
+      `<div class="pno" style="width:${[95,125,85][i]}px;height:${[95,125,85][i]}px">🧑</div>`}
+      <div class="pname">${p.name}</div><div class="pbar">${p.winRate}%</div></div>`;
+  }).join('');
+  const maxRate=leaderboard[0]?.winRate||1;
+  listEl.innerHTML=leaderboard.map((p,i)=>`
+    <div class="lb-row">
+      <div class="lb-rank">${i+1}</div>
+      ${p.image?`<img class="lb-img" src="${p.image}" alt="${p.name}">`:`<div class="lb-nimg">🧑</div>`}
+      <div class="lb-info">
+        <div class="lb-name">${p.name}</div>
+        <div class="lb-stat">${p.wins}W / ${p.losses}L · ${p.matchups} matchups</div>
+        <div class="sbar-wrap"><div class="sbar" style="width:${maxRate>0?Math.round((p.winRate/maxRate)*100):0}%"></div></div>
+      </div>
+      <div class="lb-score">${p.winRate}%<small>win rate</small></div>
+    </div>`).join('');
+}
+
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg; t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2500);
+}
+
+document.addEventListener('DOMContentLoaded',()=>{
+  document.getElementById('pw-modal').addEventListener('click',function(e){ if(e.target===this){ this.classList.remove('show'); pendingAdminBtn=null; } });
+  document.getElementById('auth-modal').addEventListener('click',function(e){ if(e.target===this) closeAuthModal(); });
+  document.getElementById('deny-modal').addEventListener('click',function(e){ if(e.target===this) closeDenyModal(); });
+  loadMe();
+  populateSignupDropdown();
+});
+</script>
 </body>
 </html>
